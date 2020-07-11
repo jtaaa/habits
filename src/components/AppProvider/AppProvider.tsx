@@ -1,8 +1,7 @@
 import React from 'react';
-import { ThemeDecorator } from 'utils/theme';
 
 const AppProvider: React.FC = ({ children }) => {
-  return <ThemeDecorator>{children}</ThemeDecorator>;
+  return <>{children}</>;
 };
 
 export default AppProvider;

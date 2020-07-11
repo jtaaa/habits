@@ -1,8 +1,8 @@
 import React from 'react';
-import Box from 'components/Box';
+import { Typography } from '@material-ui/core';
 
 const App = () => {
-  return <Box>Riddle me this</Box>;
+  return <Typography>Riddle me this</Typography>;
 };
 
 export default App;
