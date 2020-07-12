@@ -11,6 +11,7 @@ import {
   Chip,
   Collapse,
 } from '@material-ui/core';
+import HabitGrid from 'components/HabitGrid';
 import { useAddHabit, CADENCE, Habit, DAYS, DAY } from 'modules/habits';
 import LINKS from 'utils/links';
 import Footer from './Footer';
@@ -33,6 +34,9 @@ const styles = ({ spacing, palette }: Theme) =>
     habitDetailsDayChip: {
       lineHeight: '40px',
       marginLeft: spacing(1),
+    },
+    habitDetailsGrid: {
+      marginTop: spacing(3),
     },
   });
 
@@ -102,6 +106,9 @@ const HabitDetails: React.FC<Props> = ({ classes, habit, setHabit }) => {
           ))}
         </div>
       </Collapse>
+      <div className={classes.habitDetailsGrid}>
+        <HabitGrid id={habit.id} />
+      </div>
       <Footer onSave={onSave} />
     </div>
   );

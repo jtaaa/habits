@@ -7,7 +7,7 @@ const useLog = () => {
   const [log, setLog] = useState<Log>({});
   const { firestore } = useContext(FirebaseContext);
   const logRef = useMemo(() => {
-    const dateId = getDateId();
+    const dateId = getDateId(new Date());
     const logCollection = firestore.collection('logs');
     return logCollection.doc(dateId);
   }, [firestore]);
