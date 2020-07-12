@@ -1,6 +1,6 @@
-# `scroll-grid`
+# Habits
 
-This project is motivated by a front-end coding challend provided by **Verkada**.
+This project is a simple habit tracking app.
 It was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
@@ -22,6 +22,10 @@ You will also see any lint errors in the console.
 Runs the storybook of the app displaying all component stories in live-reloading server.
 
 Open [http://localhost:9009](http://localhost:9009) to view it in the browser.
+
+### `yarn deploy`
+
+Deploys the application to Firebase hosting.
 
 ### `yarn test`
 
