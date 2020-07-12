@@ -8,8 +8,11 @@ import {
   ButtonGroup,
   Button,
 } from '@material-ui/core';
+import { useAddHabit } from 'modules/habits';
 import Footer from './Footer';
 import { CADENCES } from './types';
+import { useHistory } from 'react-router-dom';
+import LINKS from 'utils/links';
 
 const styles = ({ spacing, palette }: Theme) =>
   createStyles({
@@ -28,7 +31,18 @@ const styles = ({ spacing, palette }: Theme) =>
 type Props = WithStyles<typeof styles>;
 
 const HabitDetails: React.FC<Props> = ({ classes }) => {
+  const [name, setName] = useState('');
   const [cadence, setCadence] = useState(CADENCES.daily);
+
+  const addHabit = useAddHabit();
+  const history = useHistory();
+  const onSave = async () => {
+    if (!name) {
+      return console.error('Please enter a name for your habit');
+    }
+    await addHabit({ name, cadence });
+    history.push(LINKS.HOME);
+  };
 
   return (
     <div className={classes.habitDetails}>
@@ -38,6 +52,8 @@ const HabitDetails: React.FC<Props> = ({ classes }) => {
         variant="outlined"
         fullWidth
         helperText="A simple name for you habit"
+        value={name}
+        onChange={(e) => setName(e.target.value)}
       />
       <ButtonGroup variant="text" className={classes.habitDetailsCadence}>
         <Button
@@ -53,7 +69,7 @@ const HabitDetails: React.FC<Props> = ({ classes }) => {
           Weekly
         </Button>
       </ButtonGroup>
-      <Footer onSave={async () => console.log('Saved')} />
+      <Footer onSave={onSave} />
     </div>
   );
 };
