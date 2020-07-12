@@ -9,6 +9,7 @@ import {
   ButtonGroup,
   Button,
   Chip,
+  Collapse,
 } from '@material-ui/core';
 import { useAddHabit, CADENCE, Habit, DAYS, DAY } from 'modules/habits';
 import LINKS from 'utils/links';
@@ -88,7 +89,7 @@ const HabitDetails: React.FC<Props> = ({ classes, habit, setHabit }) => {
           Weekly
         </Button>
       </ButtonGroup>
-      {habit.cadence === CADENCE.weekly && (
+      <Collapse in={habit.cadence === CADENCE.weekly}>
         <div className={classes.habitDetailsWeeklyDays}>
           {DAYS.map((day) => (
             <span key={day} className={classes.habitDetailsDayChip}>
@@ -100,7 +101,7 @@ const HabitDetails: React.FC<Props> = ({ classes, habit, setHabit }) => {
             </span>
           ))}
         </div>
-      )}
+      </Collapse>
       <Footer onSave={onSave} />
     </div>
   );
