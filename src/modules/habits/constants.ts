@@ -9,3 +9,13 @@ export const ALL_DAYS = {
   [DAY.Saturday]: true,
   [DAY.Sunday]: true,
 };
+
+export const NO_DAYS = {
+  [DAY.Monday]: false,
+  [DAY.Tuesday]: false,
+  [DAY.Wednesday]: false,
+  [DAY.Thursday]: false,
+  [DAY.Friday]: false,
+  [DAY.Saturday]: false,
+  [DAY.Sunday]: false,
+};
