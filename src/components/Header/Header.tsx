@@ -20,10 +20,6 @@ const styles = ({ spacing }: Theme) =>
     headerTitle: {
       fontWeight: 'bold',
     },
-    headerAddButtonRoot: {
-      width: '2em',
-      height: '2em',
-    },
   });
 
 type Props = WithStyles<typeof styles>;
