@@ -27,7 +27,7 @@ const Habits: React.FC<Props> = ({ classes }) => {
           <Checker
             habit={habit}
             done={log[habit.id]}
-            onClick={() => toggle(habit.id)}
+            onDone={() => toggle(habit.id)}
           />
         </div>
       ))}

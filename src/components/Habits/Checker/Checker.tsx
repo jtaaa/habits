@@ -6,6 +6,7 @@ import {
   withStyles,
   ButtonBase,
   Typography,
+  Button,
 } from '@material-ui/core';
 import clsx from 'classnames';
 import { Habit, CADENCES } from 'modules/habits';
@@ -14,11 +15,9 @@ import Indicator from './Indicator';
 const styles = ({ spacing }: Theme) =>
   createStyles({
     checker: {
-      textAlign: 'start',
       width: '100%',
       height: 64,
       display: 'flex',
-      justifyContent: 'space-between',
       alignItems: 'center',
       padding: `0 ${spacing(1)}px`,
     },
@@ -26,8 +25,10 @@ const styles = ({ spacing }: Theme) =>
       opacity: 0.5,
     },
     checkerMain: {
+      textAlign: 'start',
+      flex: 1,
       display: 'flex',
-      justifyContent: 'space-between',
+      justifyContent: 'flex-start',
       alignItems: 'center',
     },
     checkerHabitInfo: {
@@ -41,16 +42,13 @@ const styles = ({ spacing }: Theme) =>
 type Props = WithStyles<typeof styles> & {
   habit: Habit;
   done: boolean;
-  onClick: () => void;
+  onDone: () => void;
 };
 
-const HabitChecker: React.FC<Props> = ({ classes, habit, done, onClick }) => {
+const HabitChecker: React.FC<Props> = ({ classes, habit, done, onDone }) => {
   return (
-    <ButtonBase
-      className={clsx(classes.checker, { [classes.checkerDone]: done })}
-      onClick={onClick}
-    >
-      <div className={classes.checkerMain}>
+    <div className={clsx(classes.checker, { [classes.checkerDone]: done })}>
+      <ButtonBase className={classes.checkerMain}>
         <Indicator done={done} />
         <div className={classes.checkerHabitInfo}>
           <Typography variant="subtitle1">{habit.name}</Typography>
@@ -61,9 +59,11 @@ const HabitChecker: React.FC<Props> = ({ classes, habit, done, onClick }) => {
             {habit.cadence === CADENCES.daily ? 'Daily task' : 'Weekly task'}
           </Typography>
         </div>
-      </div>
-      {done && <Typography variant="button">Done</Typography>}
-    </ButtonBase>
+      </ButtonBase>
+      <Button variant="text" onClick={onDone}>
+        Done
+      </Button>
+    </div>
   );
 };
 
