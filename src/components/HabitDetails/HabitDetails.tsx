@@ -8,12 +8,16 @@ import {
   ButtonGroup,
   Button,
 } from '@material-ui/core';
+import Footer from './Footer';
 import { CADENCES } from './types';
 
 const styles = ({ spacing, palette }: Theme) =>
   createStyles({
     habitDetails: {
       padding: spacing(3),
+      display: 'flex',
+      flexDirection: 'column',
+      justifyContent: 'space-between',
     },
     habitDetailsCadence: {
       color: palette.text.secondary,
@@ -49,6 +53,7 @@ const HabitDetails: React.FC<Props> = ({ classes }) => {
           Weekly
         </Button>
       </ButtonGroup>
+      <Footer onSave={async () => console.log('Saved')} />
     </div>
   );
 };
