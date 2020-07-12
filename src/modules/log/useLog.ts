@@ -1,6 +1,6 @@
 import { useState, useContext, useEffect, useMemo } from 'react';
 import { FirebaseContext } from 'modules/firebase';
-import getDateId from 'utils/getDateId';
+import { getDateId } from 'utils/date';
 import { Log } from './types';
 
 const useLog = () => {

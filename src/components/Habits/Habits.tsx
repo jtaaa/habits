@@ -1,8 +1,17 @@
 import React from 'react';
-import { Theme, createStyles, WithStyles, withStyles } from '@material-ui/core';
+import { Link } from 'react-router-dom';
+import {
+  Theme,
+  createStyles,
+  WithStyles,
+  withStyles,
+  Button,
+  Typography,
+} from '@material-ui/core';
+import HabitChecker from 'components/HabitChecker';
 import { useHabits } from 'modules/habits';
 import { useLog } from 'modules/log';
-import Checker from './Checker';
+import LINKS from 'utils/links';
 
 const styles = ({ spacing }: Theme) =>
   createStyles({
@@ -12,25 +21,36 @@ const styles = ({ spacing }: Theme) =>
     habit: {
       marginBottom: spacing(1),
     },
+    habitsNone: {
+      paddingBottom: spacing(3),
+    },
   });
 
 type Props = WithStyles<typeof styles>;
 
 const Habits: React.FC<Props> = ({ classes }) => {
-  const habits = useHabits();
+  const { activeHabits } = useHabits();
   const { log, toggle } = useLog();
 
   return (
     <div className={classes.habits}>
-      {habits.map((habit) => (
+      {activeHabits.map((habit) => (
         <div key={habit.id} className={classes.habit}>
-          <Checker
+          <HabitChecker
             habit={habit}
             done={log[habit.id]}
             onDone={() => toggle(habit.id)}
           />
         </div>
       ))}
+      {activeHabits.length === 0 && (
+        <div className={classes.habitsNone}>
+          <Typography align="center">No active habits</Typography>
+        </div>
+      )}
+      <Button component={Link} to={LINKS.ALL} variant="text">
+        All habits
+      </Button>
     </div>
   );
 };

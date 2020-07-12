@@ -26,11 +26,6 @@ const styles = ({ spacing }: Theme) =>
     checkerDone: {
       opacity: 0.5,
     },
-    checkerLink: {
-      width: '100%',
-      textDecoration: 'none',
-      color: 'inherit',
-    },
     checkerMain: {
       textAlign: 'start',
       flex: 1,
@@ -48,30 +43,34 @@ const styles = ({ spacing }: Theme) =>
 
 type Props = WithStyles<typeof styles> & {
   habit: Habit;
-  done: boolean;
-  onDone: () => void;
+  done?: boolean;
+  onDone?: () => void;
 };
 
 const HabitChecker: React.FC<Props> = ({ classes, habit, done, onDone }) => {
   return (
     <div className={clsx(classes.checker, { [classes.checkerDone]: done })}>
-      <Link to={LINKS.HABIT(habit.id)} className={classes.checkerLink}>
-        <ButtonBase className={classes.checkerMain}>
-          <Indicator done={done} />
-          <div className={classes.checkerHabitInfo}>
-            <Typography variant="subtitle1">{habit.name}</Typography>
-            <Typography
-              className={classes.checkerHabitCadence}
-              color="textSecondary"
-            >
-              {habit.cadence === CADENCE.daily ? 'Daily task' : 'Weekly task'}
-            </Typography>
-          </div>
-        </ButtonBase>
-      </Link>
-      <Button variant="text" onClick={onDone}>
-        Done
-      </Button>
+      <ButtonBase
+        className={classes.checkerMain}
+        component={Link}
+        to={LINKS.HABIT(habit.id)}
+      >
+        <Indicator done={!!done} />
+        <div className={classes.checkerHabitInfo}>
+          <Typography variant="subtitle1">{habit.name}</Typography>
+          <Typography
+            className={classes.checkerHabitCadence}
+            color="textSecondary"
+          >
+            {habit.cadence === CADENCE.daily ? 'Daily task' : 'Weekly task'}
+          </Typography>
+        </div>
+      </ButtonBase>
+      {onDone && (
+        <Button variant="text" onClick={onDone}>
+          Done
+        </Button>
+      )}
     </div>
   );
 };
