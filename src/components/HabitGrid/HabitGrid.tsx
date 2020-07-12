@@ -6,7 +6,7 @@ import clsx from 'classnames';
 import { useHabitLogs } from 'modules/log';
 import { getDateId } from 'utils/date';
 
-const GRID_SIZE = 100;
+const GRID_SIZE = 140;
 const TODAY = new Date();
 
 const styles = ({ spacing, palette }: Theme) =>
@@ -15,7 +15,7 @@ const styles = ({ spacing, palette }: Theme) =>
       width: '100%',
       display: 'grid',
       gridTemplateColumns: 'repeat(20, 1fr)',
-      gridTemplateRows: 'repeat(5, 8px)',
+      gridTemplateRows: 'repeat(7, 8px)',
       gridGap: spacing(1),
       gridAutoFlow: 'column',
     },
