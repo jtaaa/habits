@@ -9,10 +9,20 @@ import {
 import HabitChecker from 'components/HabitChecker';
 import { useHabits } from 'modules/habits';
 
-const styles = ({ spacing }: Theme) =>
+const styles = ({ spacing, breakpoints }: Theme) =>
   createStyles({
     allHabits: {
       padding: spacing(3),
+    },
+    habits: {
+      [breakpoints.up('sm')]: {
+        display: 'grid',
+        gridTemplateColumns: '1fr 1fr',
+        gridColumnGap: spacing(1),
+      },
+      [breakpoints.up('md')]: {
+        gridTemplateColumns: '1fr 1fr 1fr',
+      },
     },
     habit: {
       marginBottom: spacing(1),
@@ -28,12 +38,15 @@ const AllHabits: React.FC<Props> = ({ classes }) => {
   const { habits } = useHabits();
   return (
     <div className={classes.allHabits}>
-      {habits.map((habit) => (
-        <div key={habit.id} className={classes.habit}>
-          <HabitChecker habit={habit} />
+      {habits.length !== 0 ? (
+        <div className={classes.habits}>
+          {habits.map((habit) => (
+            <div key={habit.id} className={classes.habit}>
+              <HabitChecker habit={habit} />
+            </div>
+          ))}
         </div>
-      ))}
-      {habits.length === 0 && (
+      ) : (
         <div className={classes.habitsNone}>
           <Typography align="center">No habits</Typography>
         </div>

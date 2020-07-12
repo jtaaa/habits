@@ -13,10 +13,20 @@ import { useHabits } from 'modules/habits';
 import { useLog } from 'modules/log';
 import LINKS from 'utils/links';
 
-const styles = ({ spacing }: Theme) =>
+const styles = ({ spacing, breakpoints }: Theme) =>
   createStyles({
-    habits: {
+    container: {
       padding: spacing(3),
+    },
+    habits: {
+      [breakpoints.up('sm')]: {
+        display: 'grid',
+        gridTemplateColumns: '1fr 1fr',
+        gridColumnGap: spacing(1),
+      },
+      [breakpoints.up('md')]: {
+        gridTemplateColumns: '1fr 1fr 1fr',
+      },
     },
     habit: {
       marginBottom: spacing(1),
@@ -33,17 +43,20 @@ const Habits: React.FC<Props> = ({ classes }) => {
   const { log, toggle } = useLog();
 
   return (
-    <div className={classes.habits}>
-      {activeHabits.map((habit) => (
-        <div key={habit.id} className={classes.habit}>
-          <HabitChecker
-            habit={habit}
-            done={log[habit.id]}
-            onDone={() => toggle(habit.id)}
-          />
+    <div className={classes.container}>
+      {activeHabits.length !== 0 ? (
+        <div className={classes.habits}>
+          {activeHabits.map((habit) => (
+            <div key={habit.id} className={classes.habit}>
+              <HabitChecker
+                habit={habit}
+                done={log[habit.id]}
+                onDone={() => toggle(habit.id)}
+              />
+            </div>
+          ))}
         </div>
-      ))}
-      {activeHabits.length === 0 && (
+      ) : (
         <div className={classes.habitsNone}>
           <Typography align="center">No active habits</Typography>
         </div>
