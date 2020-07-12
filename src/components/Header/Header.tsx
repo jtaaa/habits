@@ -7,7 +7,7 @@ import {
   WithStyles,
   IconButton,
 } from '@material-ui/core';
-import { Add as AddIcon } from '@material-ui/icons';
+import AddIcon from '@material-ui/icons/Add';
 
 const styles = ({ spacing }: Theme) =>
   createStyles({
