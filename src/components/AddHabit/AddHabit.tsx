@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
-import { Habit, CADENCES } from 'modules/habits';
+import { Habit, CADENCE, ALL_DAYS } from 'modules/habits';
 import HabitDetails from 'components/HabitDetails';
 
 const AddHabit = () => {
   const [habit, setHabit] = useState<Habit>({
     name: '',
-    cadence: CADENCES.daily,
+    cadence: CADENCE.daily,
     id: '',
+    days: ALL_DAYS,
   });
   return <HabitDetails habit={habit} setHabit={setHabit} />;
 };

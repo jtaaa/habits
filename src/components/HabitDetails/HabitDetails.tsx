@@ -8,8 +8,9 @@ import {
   TextField,
   ButtonGroup,
   Button,
+  Chip,
 } from '@material-ui/core';
-import { useAddHabit, CADENCES, Habit } from 'modules/habits';
+import { useAddHabit, CADENCE, Habit, DAYS, DAY } from 'modules/habits';
 import LINKS from 'utils/links';
 import Footer from './Footer';
 
@@ -25,6 +26,13 @@ const styles = ({ spacing, palette }: Theme) =>
       color: palette.text.secondary,
       marginTop: spacing(2),
     },
+    habitDetailsWeeklyDays: {
+      marginTop: spacing(2),
+    },
+    habitDetailsDayChip: {
+      lineHeight: '40px',
+      marginLeft: spacing(1),
+    },
   });
 
 type Props = WithStyles<typeof styles> & {
@@ -35,11 +43,14 @@ type Props = WithStyles<typeof styles> & {
 };
 
 const HabitDetails: React.FC<Props> = ({ classes, habit, setHabit }) => {
-  const setName = async (name: string) => {
-    await setHabit({ ...habit, name });
+  const setName = (name: string) => {
+    setHabit({ ...habit, name });
   };
-  const setCadence = async (cadence: CADENCES) => {
-    await setHabit({ ...habit, cadence });
+  const setCadence = (cadence: CADENCE) => {
+    setHabit({ ...habit, cadence });
+  };
+  const toggleDay = (day: DAY) => {
+    setHabit({ ...habit, days: { ...habit.days, [day]: !habit.days?.[day] } });
   };
 
   const addHabit = useAddHabit();
@@ -65,18 +76,31 @@ const HabitDetails: React.FC<Props> = ({ classes, habit, setHabit }) => {
       />
       <ButtonGroup variant="text" className={classes.habitDetailsCadence}>
         <Button
-          onClick={() => setCadence(CADENCES.daily)}
-          color={habit.cadence === CADENCES.daily ? 'primary' : 'secondary'}
+          onClick={() => setCadence(CADENCE.daily)}
+          color={habit.cadence === CADENCE.daily ? 'primary' : 'secondary'}
         >
           Daily
         </Button>
         <Button
-          onClick={() => setCadence(CADENCES.weekly)}
-          color={habit.cadence === CADENCES.weekly ? 'primary' : 'secondary'}
+          onClick={() => setCadence(CADENCE.weekly)}
+          color={habit.cadence === CADENCE.weekly ? 'primary' : 'secondary'}
         >
           Weekly
         </Button>
       </ButtonGroup>
+      {habit.cadence === CADENCE.weekly && (
+        <div className={classes.habitDetailsWeeklyDays}>
+          {DAYS.map((day) => (
+            <span key={day} className={classes.habitDetailsDayChip}>
+              <Chip
+                label={day}
+                variant={habit.days?.[day] ? 'default' : 'outlined'}
+                onClick={() => toggleDay(day)}
+              />
+            </span>
+          ))}
+        </div>
+      )}
       <Footer onSave={onSave} />
     </div>
   );

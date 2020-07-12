@@ -10,7 +10,7 @@ import {
   Button,
 } from '@material-ui/core';
 import clsx from 'classnames';
-import { Habit, CADENCES } from 'modules/habits';
+import { Habit, CADENCE } from 'modules/habits';
 import LINKS from 'utils/links';
 import Indicator from './Indicator';
 
@@ -64,7 +64,7 @@ const HabitChecker: React.FC<Props> = ({ classes, habit, done, onDone }) => {
               className={classes.checkerHabitCadence}
               color="textSecondary"
             >
-              {habit.cadence === CADENCES.daily ? 'Daily task' : 'Weekly task'}
+              {habit.cadence === CADENCE.daily ? 'Daily task' : 'Weekly task'}
             </Typography>
           </div>
         </ButtonBase>
