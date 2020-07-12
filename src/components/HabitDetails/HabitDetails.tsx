@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import {
   createStyles,
   withStyles,
@@ -8,11 +9,9 @@ import {
   ButtonGroup,
   Button,
 } from '@material-ui/core';
-import { useAddHabit } from 'modules/habits';
-import Footer from './Footer';
-import { CADENCES } from './types';
-import { useHistory } from 'react-router-dom';
+import { useAddHabit, CADENCES } from 'modules/habits';
 import LINKS from 'utils/links';
+import Footer from './Footer';
 
 const styles = ({ spacing, palette }: Theme) =>
   createStyles({

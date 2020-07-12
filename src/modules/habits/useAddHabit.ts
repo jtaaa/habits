@@ -6,7 +6,7 @@ const useAddHabit = () => {
   const { firestore } = useContext(FirebaseContext);
   const habitsCollection = firestore.collection('habits');
 
-  const addHabit = async (habit: Habit) => {
+  const addHabit = async (habit: Omit<Habit, 'id'>) => {
     await habitsCollection.add(habit);
   };
 

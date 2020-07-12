@@ -1,8 +1,8 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
-import { Typography } from '@material-ui/core';
 import Header from 'components/Header';
 import HabitDetails from 'components/HabitDetails';
+import Habits from 'components/Habits';
 
 const App = () => {
   return (
@@ -13,7 +13,7 @@ const App = () => {
           <HabitDetails />
         </Route>
         <Route path="/" exact>
-          <Typography>Riddle me this</Typography>
+          <Habits />
         </Route>
       </Switch>
     </div>
