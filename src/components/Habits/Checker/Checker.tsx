@@ -41,12 +41,14 @@ const styles = ({ spacing }: Theme) =>
 type Props = WithStyles<typeof styles> & {
   habit: Habit;
   done: boolean;
+  onClick: () => void;
 };
 
-const HabitChecker: React.FC<Props> = ({ classes, habit, done }) => {
+const HabitChecker: React.FC<Props> = ({ classes, habit, done, onClick }) => {
   return (
     <ButtonBase
       className={clsx(classes.checker, { [classes.checkerDone]: done })}
+      onClick={onClick}
     >
       <div className={classes.checkerMain}>
         <Indicator done={done} />

@@ -4,11 +4,11 @@ import { Habit } from './types';
 
 const useHabits = () => {
   const { firestore } = useContext(FirebaseContext);
-  const habitsCollection = firestore.collection('habits');
-
   const [habits, setHabits] = useState<Habit[]>([]);
 
   useEffect(() => {
+    const habitsCollection = firestore.collection('habits');
+
     const getHabits = async () => {
       const habitsSnapshot = await habitsCollection.get();
       const habits: Habit[] = [];
@@ -21,7 +21,7 @@ const useHabits = () => {
       setHabits(habits);
     };
     getHabits();
-  }, [habitsCollection]);
+  }, [firestore]);
 
   return habits;
 };
