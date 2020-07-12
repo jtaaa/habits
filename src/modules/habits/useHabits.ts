@@ -7,11 +7,13 @@ const useHabits = () => {
   const { firestore } = useContext(FirebaseContext);
   const [habits, setHabits] = useState<Habit[]>([]);
   const [activeHabits, setActiveHabits] = useState<Habit[]>([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const habitsCollection = firestore.collection('habits');
 
     const getHabits = async () => {
+      setLoading(true);
       const habitsSnapshot = await habitsCollection.get();
       const habits: Habit[] = [];
       const activeHabits: Habit[] = [];
@@ -27,11 +29,12 @@ const useHabits = () => {
       });
       setHabits(habits);
       setActiveHabits(activeHabits);
+      setLoading(false);
     };
     getHabits();
   }, [firestore]);
 
-  return { habits, activeHabits };
+  return { habits, activeHabits, loading };
 };
 
 export default useHabits;

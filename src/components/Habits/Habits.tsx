@@ -7,6 +7,7 @@ import {
   withStyles,
   Button,
   Typography,
+  LinearProgress,
 } from '@material-ui/core';
 import HabitChecker from 'components/HabitChecker';
 import { useHabits } from 'modules/habits';
@@ -39,8 +40,12 @@ const styles = ({ spacing, breakpoints }: Theme) =>
 type Props = WithStyles<typeof styles>;
 
 const Habits: React.FC<Props> = ({ classes }) => {
-  const { activeHabits } = useHabits();
+  const { activeHabits, loading } = useHabits();
   const { log, toggle } = useLog();
+
+  if (loading) {
+    return <LinearProgress />;
+  }
 
   return (
     <div className={classes.container}>
