@@ -30,25 +30,27 @@ type Props = WithStyles<typeof styles>;
 const Header: React.FC<Props> = ({ classes }) => {
   const location = useLocation();
   const isOnHome = location.pathname === LINKS.HOME;
+  const isOnLogin = location.pathname === LINKS.LOGIN;
 
   return (
     <div className={classes.header}>
       <Typography variant="h3" className={classes.headerTitle}>
         Habits
       </Typography>
-      {isOnHome ? (
-        <Link to={LINKS.ADD_HABIT}>
-          <IconButton aria-label="add">
-            <AddIcon fontSize="large" />
-          </IconButton>
-        </Link>
-      ) : (
-        <Link to={LINKS.HOME}>
-          <IconButton aria-label="cancel">
-            <CancelIcon fontSize="large" />
-          </IconButton>
-        </Link>
-      )}
+      {!isOnLogin &&
+        (isOnHome ? (
+          <Link to={LINKS.ADD_HABIT}>
+            <IconButton aria-label="add">
+              <AddIcon fontSize="large" />
+            </IconButton>
+          </Link>
+        ) : (
+          <Link to={LINKS.HOME}>
+            <IconButton aria-label="cancel">
+              <CancelIcon fontSize="large" />
+            </IconButton>
+          </Link>
+        ))}
     </div>
   );
 };
