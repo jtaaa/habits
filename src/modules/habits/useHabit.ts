@@ -2,12 +2,16 @@ import { useState, useMemo, useContext, useEffect, useCallback } from 'react';
 import debounce from 'lodash/debounce';
 import { FirebaseContext } from 'modules/firebase';
 import { Habit } from './types';
+import { EMPTY_HABIT } from './constants';
 
 const SYNC_DEBOUNCE_WAIT = 300;
 
 const useHabit = (id: string) => {
-  const [habit, setHabit] = useState<Habit>();
   const { firestore } = useContext(FirebaseContext);
+
+  const [habit, setHabit] = useState(EMPTY_HABIT);
+  const [loading, setLoading] = useState(true);
+
   const habitRef = useMemo(() => {
     const habitsCollection = firestore.collection('/habits');
     return habitsCollection.doc(id);
@@ -15,8 +19,10 @@ const useHabit = (id: string) => {
 
   useEffect(() => {
     const getHabit = async () => {
+      setLoading(true);
       const habitDoc = await habitRef.get();
       setHabit({ ...(habitDoc.data() as Omit<Habit, 'id'>), id: habitDoc.id });
+      setLoading(false);
     };
     getHabit();
   }, [habitRef]);
@@ -32,7 +38,7 @@ const useHabit = (id: string) => {
     syncHabitToFirebase(habit);
   }, [habit, syncHabitToFirebase]);
 
-  return { habit, setHabit };
+  return { habit, setHabit, loading };
 };
 
 export default useHabit;

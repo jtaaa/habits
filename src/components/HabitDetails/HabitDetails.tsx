@@ -11,7 +11,7 @@ import {
   Chip,
   Collapse,
 } from '@material-ui/core';
-import { useAddHabit, CADENCE, Habit, DAYS, DAY } from 'modules/habits';
+import { useAddHabit, CADENCE, DAYS, DAY, HabitData } from 'modules/habits';
 import LINKS from 'utils/links';
 import Footer from './Footer';
 
@@ -37,10 +37,8 @@ const styles = ({ spacing, palette }: Theme) =>
   });
 
 type Props = WithStyles<typeof styles> & {
-  habit: Habit;
-  setHabit:
-    | React.Dispatch<React.SetStateAction<Habit | undefined>>
-    | React.Dispatch<React.SetStateAction<Habit>>;
+  habit: HabitData;
+  setHabit: (habitData: HabitData) => void;
 };
 
 const HabitDetails: React.FC<Props> = ({ classes, habit, setHabit }) => {

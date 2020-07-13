@@ -1,4 +1,4 @@
-import { DAY } from './types';
+import { DAY, CADENCE, Habit, HabitData } from './types';
 
 export const ALL_DAYS = {
   [DAY.Monday]: true,
@@ -18,4 +18,16 @@ export const NO_DAYS = {
   [DAY.Friday]: false,
   [DAY.Saturday]: false,
   [DAY.Sunday]: false,
+};
+
+export const EMPTY_HABIT_DATA: HabitData = {
+  name: '',
+  cadence: CADENCE.daily,
+  days: NO_DAYS,
+};
+
+export const EMPTY_HABIT: Habit = {
+  ...EMPTY_HABIT_DATA,
+  id: '',
+  owner: '',
 };

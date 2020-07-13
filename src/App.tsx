@@ -11,12 +11,12 @@ import LINKS from 'utils/links';
 
 const App = () => {
   const location = useLocation();
-  const { user, loading } = useContext(UserContext);
+  const { user } = useContext(UserContext);
 
-  if (!loading && !user && location.pathname !== LINKS.LOGIN) {
+  if (!user && location.pathname !== LINKS.LOGIN) {
     return <Redirect to={LINKS.LOGIN} />;
   }
-  if (!loading && user && location.pathname === LINKS.LOGIN) {
+  if (user && location.pathname === LINKS.LOGIN) {
     return <Redirect to={LINKS.HOME} />;
   }
 
@@ -24,8 +24,8 @@ const App = () => {
     <div>
       <Header />
       <Switch>
-        <Route path={LINKS.LOGIN} exact>
-          <Login />
+        <Route path={LINKS.HOME} exact>
+          <Habits />
         </Route>
         <Route path={LINKS.ALL} exact>
           <AllHabits />
@@ -36,8 +36,8 @@ const App = () => {
         <Route path={LINKS.HABIT_TEMPLATE}>
           <Habit />
         </Route>
-        <Route path={LINKS.HOME} exact>
-          <Habits />
+        <Route path={LINKS.LOGIN} exact>
+          <Login />
         </Route>
       </Switch>
     </div>

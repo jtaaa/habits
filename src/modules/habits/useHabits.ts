@@ -1,16 +1,22 @@
 import { useContext, useState, useEffect } from 'react';
 import { FirebaseContext } from 'modules/firebase';
+import { UserContext } from 'modules/user';
 import { Habit } from './types';
 import { isHabitActive } from './utils';
 
 const useHabits = () => {
   const { firestore } = useContext(FirebaseContext);
+  const { user } = useContext(UserContext);
+  if (!user) throw new Error('Cannot useHabits when not signed in.');
+
   const [habits, setHabits] = useState<Habit[]>([]);
   const [activeHabits, setActiveHabits] = useState<Habit[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const habitsCollection = firestore.collection('habits');
+    const habitsCollection = firestore
+      .collection('habits')
+      .where('owner', '==', user.uid);
 
     const getHabits = async () => {
       setLoading(true);
@@ -32,7 +38,7 @@ const useHabits = () => {
       setLoading(false);
     };
     getHabits();
-  }, [firestore]);
+  }, [firestore, user.uid]);
 
   return { habits, activeHabits, loading };
 };

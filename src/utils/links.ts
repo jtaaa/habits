@@ -1,10 +1,10 @@
 const LINKS = {
-  HOME: '/',
+  HOME: '/home',
   ADD_HABIT: '/add',
   HABIT: (id: string) => `/${id}`,
   HABIT_TEMPLATE: '/:id',
   ALL: '/all',
-  LOGIN: '/login',
+  LOGIN: '/',
 };
 
 export default LINKS;

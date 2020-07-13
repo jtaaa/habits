@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import { createStyles, withStyles, WithStyles, Theme } from '@material-ui/core';
 import HabitDetails from 'components/HabitDetails';
 import HabitGrid from 'components/HabitGrid';
-import { useHabit } from 'modules/habits';
+import { useHabit, HabitData } from 'modules/habits';
 
 type Params = {
   id: string;
@@ -23,11 +23,15 @@ const Habit: React.FC<Props> = ({ classes }) => {
   const { id } = useParams<Params>();
   const { habit, setHabit } = useHabit(id);
 
+  const setHabitData = (habitData: HabitData) => {
+    setHabit((habit) => ({ ...habit, ...habitData }));
+  };
+
   return (
     <div className={classes.habit}>
       {habit && (
         <>
-          <HabitDetails habit={habit} setHabit={setHabit} />
+          <HabitDetails habit={habit} setHabit={setHabitData} />
           <div className={classes.habitGrid}>
             <HabitGrid id={habit.id} />
           </div>

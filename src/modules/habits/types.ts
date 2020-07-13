@@ -22,9 +22,12 @@ export const DAYS: DAY[] = [
   DAY.Sunday,
 ];
 
-export type Habit = {
-  id: string;
+export type HabitData = {
   name: string;
   cadence: CADENCE;
   days: Record<DAY, boolean>;
+};
+export type Habit = HabitData & {
+  id: string;
+  owner: string;
 };
