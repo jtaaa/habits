@@ -59,7 +59,7 @@ const HabitChecker: React.FC<Props> = ({ classes, habit, done, onDone }) => {
   return (
     <Card
       className={clsx(classes.checker)}
-      elevation={isHovering ? 1 : !done ? 1 : 0}
+      elevation={isHovering ? 2 : !done ? 1 : 0}
       onMouseOver={() => setIsHovering(true)}
       onMouseOut={() => setIsHovering(false)}
     >
