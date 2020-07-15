@@ -1,31 +1,15 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
-import {
-  createStyles,
-  withStyles,
-  WithStyles,
-  Theme,
-  LinearProgress,
-} from '@material-ui/core';
+import { LinearProgress } from '@material-ui/core';
 import HabitDetails from 'components/HabitDetails';
-import HabitGrid from 'components/HabitGrid';
+import HabitStats from 'components/HabitStats';
 import { useHabit, HabitData } from 'modules/habits';
 
 type Params = {
   id: string;
 };
 
-const styles = ({ spacing }: Theme) =>
-  createStyles({
-    habit: {},
-    habitGrid: {
-      padding: spacing(3),
-    },
-  });
-
-type Props = WithStyles<typeof styles>;
-
-const Habit: React.FC<Props> = ({ classes }) => {
+const Habit: React.FC = () => {
   const { id } = useParams<Params>();
   const { habit, setHabit, loading } = useHabit(id);
 
@@ -38,17 +22,11 @@ const Habit: React.FC<Props> = ({ classes }) => {
   }
 
   return (
-    <div className={classes.habit}>
-      {habit && (
-        <>
-          <HabitDetails habit={habit} setHabit={setHabitData} />
-          <div className={classes.habitGrid}>
-            <HabitGrid id={habit.id} />
-          </div>
-        </>
-      )}
+    <div>
+      <HabitDetails habit={habit} setHabit={setHabitData} />
+      <HabitStats id={habit.id} />
     </div>
   );
 };
 
-export default withStyles(styles)(Habit);
+export default Habit;

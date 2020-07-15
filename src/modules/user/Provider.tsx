@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
+import { LinearProgress } from '@material-ui/core';
 import { FirebaseContext } from 'modules/firebase';
 import UserContext from './Context';
 
@@ -17,7 +18,7 @@ const UserProvider: React.FC = ({ children }) => {
 
   return (
     <UserContext.Provider value={{ user, loading }}>
-      {children}
+      {loading ? <LinearProgress /> : children}
     </UserContext.Provider>
   );
 };

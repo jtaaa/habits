@@ -18,7 +18,7 @@ const useLog = () => {
       .doc(user.uid)
       .collection('logs');
     return logCollection.doc(dateId);
-  }, [firestore]);
+  }, [firestore, user.uid]);
 
   useEffect(() => {
     const getLog = async () => {

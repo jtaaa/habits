@@ -7,7 +7,8 @@ const useHabitLogs = (id: string) => {
   const { user } = useContext(UserContext);
   if (!user) throw new Error('Cannot useLog when not signed in.');
 
-  const [habitLogs, setHabitLogs] = useState<Record<string, boolean>>({});
+  const [habitLogs, setHabitLogs] = useState<Record<string, true>>({});
+  const [loading, setLoading] = useState(true);
 
   const logsRef = useMemo(() => {
     const logsQuery = firestore
@@ -16,21 +17,23 @@ const useHabitLogs = (id: string) => {
       .collection('logs')
       .where(id, '==', true);
     return logsQuery;
-  }, [firestore, id]);
+  }, [firestore, id, user.uid]);
 
   useEffect(() => {
     const getHabitLogs = async () => {
+      setLoading(true);
       const habitLogsSnapshot = await logsRef.get();
-      const habitLogs: Record<string, boolean> = {};
+      const habitLogs: Record<string, true> = {};
       habitLogsSnapshot.forEach((habitLogSnapshot) => {
         habitLogs[habitLogSnapshot.id] = true;
       });
       setHabitLogs(habitLogs);
+      setLoading(false);
     };
     getHabitLogs();
   }, [logsRef]);
 
-  return habitLogs;
+  return { habitLogs, loading };
 };
 
 export default useHabitLogs;
