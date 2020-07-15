@@ -16,7 +16,7 @@ const useHabitLogs = (id: string) => {
       .collection('logs')
       .where(id, '==', true);
     return logsQuery;
-  }, [firestore, id]);
+  }, [firestore, id, user.uid]);
 
   useEffect(() => {
     const getHabitLogs = async () => {
