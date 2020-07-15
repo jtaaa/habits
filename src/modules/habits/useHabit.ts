@@ -34,9 +34,9 @@ const useHabit = (id: string) => {
     [habitRef],
   );
   useEffect(() => {
-    if (!habit) return;
+    if (loading) return;
     syncHabitToFirebase(habit);
-  }, [habit, syncHabitToFirebase]);
+  }, [habit, syncHabitToFirebase, loading]);
 
   return { habit, setHabit, loading };
 };

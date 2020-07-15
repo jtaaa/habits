@@ -3,7 +3,6 @@ import range from 'lodash/range';
 import { subDays } from 'date-fns';
 import { WithStyles, Theme, createStyles, withStyles } from '@material-ui/core';
 import clsx from 'classnames';
-import { useHabitLogs } from 'modules/log';
 import { getDateId } from 'utils/date';
 
 const GRID_SIZE = 140;
@@ -27,10 +26,9 @@ const styles = ({ spacing, palette }: Theme) =>
     },
   });
 
-type Props = WithStyles<typeof styles> & { id: string };
+type Props = WithStyles<typeof styles> & { habitLogs: Record<string, boolean> };
 
-const HabitGrid: React.FC<Props> = ({ classes, id }) => {
-  const habitLogs = useHabitLogs(id);
+const HabitGrid: React.FC<Props> = ({ classes, habitLogs }) => {
   return (
     <div className={classes.habitGrid}>
       {range(GRID_SIZE - 1, -1, -1).map((offset) => {
