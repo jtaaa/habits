@@ -4,7 +4,7 @@ const theme = createMuiTheme({
   palette: {
     type: 'light',
     background: {
-      default: '#fff',
+      default: '#fafafa',
     },
     text: {
       primary: 'rgb(30, 30, 30)',

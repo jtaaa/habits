@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import {
   Theme,
@@ -7,14 +7,16 @@ import {
   withStyles,
   ButtonBase,
   Typography,
-  Button,
+  Card,
+  IconButton,
 } from '@material-ui/core';
+import CheckIcon from '@material-ui/icons/Check';
 import clsx from 'classnames';
 import { Habit, CADENCE } from 'modules/habits';
 import LINKS from 'utils/links';
 import Indicator from './Indicator';
 
-const styles = ({ spacing }: Theme) =>
+const styles = ({ spacing, palette }: Theme) =>
   createStyles({
     checker: {
       width: '100%',
@@ -23,8 +25,11 @@ const styles = ({ spacing }: Theme) =>
       alignItems: 'center',
       padding: `0 ${spacing(1)}px`,
     },
-    checkerDone: {
+    checkerMainDone: {
       opacity: 0.5,
+    },
+    checkDone: {
+      color: palette.success.main,
     },
     checkerMain: {
       textAlign: 'start',
@@ -32,6 +37,7 @@ const styles = ({ spacing }: Theme) =>
       display: 'flex',
       justifyContent: 'flex-start',
       alignItems: 'center',
+      transition: 'opacity 200ms ease-in',
     },
     checkerHabitInfo: {
       marginLeft: spacing(2),
@@ -48,10 +54,19 @@ type Props = WithStyles<typeof styles> & {
 };
 
 const HabitChecker: React.FC<Props> = ({ classes, habit, done, onDone }) => {
+  const [isHovering, setIsHovering] = useState(false);
+
   return (
-    <div className={clsx(classes.checker, { [classes.checkerDone]: done })}>
+    <Card
+      className={clsx(classes.checker)}
+      elevation={isHovering ? 1 : !done ? 1 : 0}
+      onMouseOver={() => setIsHovering(true)}
+      onMouseOut={() => setIsHovering(false)}
+    >
       <ButtonBase
-        className={classes.checkerMain}
+        className={clsx(classes.checkerMain, {
+          [classes.checkerMainDone]: done && !isHovering,
+        })}
         component={Link}
         to={LINKS.HABIT(habit.id)}
       >
@@ -67,11 +82,15 @@ const HabitChecker: React.FC<Props> = ({ classes, habit, done, onDone }) => {
         </div>
       </ButtonBase>
       {onDone && (
-        <Button variant="text" onClick={onDone}>
-          Done
-        </Button>
+        <IconButton
+          className={clsx({ [classes.checkDone]: done })}
+          onClick={onDone}
+          aria-label="done"
+        >
+          <CheckIcon />
+        </IconButton>
       )}
-    </div>
+    </Card>
   );
 };
 
