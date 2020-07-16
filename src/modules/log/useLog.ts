@@ -1,10 +1,8 @@
 import { useState, useContext, useEffect, useMemo } from 'react';
 import { FirebaseContext } from 'modules/firebase';
 import { UserContext } from 'modules/user';
-import { getDateId } from 'utils/date';
+import { getDateId, TODAY } from 'utils/date';
 import { Log } from './types';
-
-const TODAY = new Date();
 
 const useLog = (date = TODAY) => {
   const { firestore } = useContext(FirebaseContext);

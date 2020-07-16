@@ -8,6 +8,7 @@ import AllHabits from 'components/AllHabits';
 import Login from 'components/Login';
 import { UserContext } from 'modules/user';
 import LINKS from 'utils/links';
+import { YESTERDAY } from 'utils/date';
 
 const App = () => {
   const location = useLocation();
@@ -24,6 +25,9 @@ const App = () => {
     <div>
       <Header />
       <Switch>
+        <Route path={LINKS.YESTERDAY} exact>
+          <Habits date={YESTERDAY} />
+        </Route>
         <Route path={LINKS.ALL} exact>
           <AllHabits />
         </Route>

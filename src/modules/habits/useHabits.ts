@@ -1,10 +1,11 @@
 import { useContext, useState, useEffect } from 'react';
 import { FirebaseContext } from 'modules/firebase';
 import { UserContext } from 'modules/user';
+import { TODAY } from 'utils/date';
 import { Habit } from './types';
 import { isHabitActive } from './utils';
 
-const useHabits = () => {
+const useHabits = (date = TODAY) => {
   const { firestore } = useContext(FirebaseContext);
   const { user } = useContext(UserContext);
   if (!user) throw new Error('Cannot useHabits when not signed in.');
@@ -28,7 +29,7 @@ const useHabits = () => {
           ...(habitSnapshot.data() as Omit<Habit, 'id'>),
           id: habitSnapshot.id,
         };
-        if (isHabitActive(habit)) {
+        if (isHabitActive(habit, date)) {
           activeHabits.push(habit);
         }
         habits.push(habit);
@@ -38,7 +39,7 @@ const useHabits = () => {
       setLoading(false);
     };
     getHabits();
-  }, [firestore, user.uid]);
+  }, [firestore, user.uid, date]);
 
   return { habits, activeHabits, loading };
 };

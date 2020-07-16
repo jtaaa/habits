@@ -5,6 +5,7 @@ const LINKS = {
   HABIT_TEMPLATE: '/:id',
   ALL: '/all',
   SIGNIN: '/signin',
+  YESTERDAY: '/yesterday',
 };
 
 export default LINKS;

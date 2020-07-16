@@ -14,6 +14,7 @@ import { useLog } from 'modules/log';
 import LINKS from 'utils/links';
 import HabitGroup from './HabitGroup';
 import Progress from './Progress';
+import Footer from './Footer';
 
 const styles = ({ spacing }: Theme) =>
   createStyles({
@@ -26,11 +27,13 @@ const styles = ({ spacing }: Theme) =>
     },
   });
 
-type Props = WithStyles<typeof styles>;
+type Props = WithStyles<typeof styles> & {
+  date?: Date;
+};
 
-const Habits: React.FC<Props> = ({ classes }) => {
-  const { activeHabits, loading } = useHabits();
-  const { log, toggle } = useLog();
+const Habits: React.FC<Props> = ({ classes, date }) => {
+  const { activeHabits, loading } = useHabits(date);
+  const { log, toggle } = useLog(date);
 
   const allDayHabits = activeHabits.filter(
     (habit) => habit.timePeriod === TimePeriod.AllDay,
@@ -87,6 +90,7 @@ const Habits: React.FC<Props> = ({ classes }) => {
       <Button component={Link} to={LINKS.ALL} variant="text">
         All habits
       </Button>
+      <Footer date={date} />
     </div>
   );
 };

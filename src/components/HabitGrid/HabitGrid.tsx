@@ -3,10 +3,9 @@ import range from 'lodash/range';
 import { subDays } from 'date-fns';
 import { WithStyles, Theme, createStyles, withStyles } from '@material-ui/core';
 import clsx from 'classnames';
-import { getDateId } from 'utils/date';
+import { getDateId, TODAY } from 'utils/date';
 
 const GRID_SIZE = 140;
-const TODAY = new Date();
 
 const styles = ({ spacing, palette }: Theme) =>
   createStyles({
