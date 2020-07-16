@@ -13,11 +13,13 @@ import { useHabits, TimePeriod } from 'modules/habits';
 import { useLog } from 'modules/log';
 import LINKS from 'utils/links';
 import HabitGroup from './HabitGroup';
+import Progress from './Progress';
 
 const styles = ({ spacing }: Theme) =>
   createStyles({
     container: {
       padding: spacing(3),
+      paddingTop: 0,
     },
     habitsNone: {
       paddingBottom: spacing(3),
@@ -43,12 +45,16 @@ const Habits: React.FC<Props> = ({ classes }) => {
     (habit) => habit.timePeriod === TimePeriod.Night,
   );
 
+  const completionCount = Object.values(log).filter(Boolean).length;
+  const percentCompleted = (completionCount / activeHabits.length) * 100;
+
   if (loading) {
     return <LinearProgress />;
   }
 
   return (
     <div className={classes.container}>
+      <Progress percentCompleted={percentCompleted} />
       {activeHabits.length === 0 && (
         <div className={classes.habitsNone}>
           <Typography align="center">No active habits</Typography>
