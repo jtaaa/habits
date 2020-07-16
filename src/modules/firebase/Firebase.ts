@@ -17,14 +17,16 @@ export const config = {
 class Firebase {
   auth: app.auth.Auth;
   firestore: app.firestore.Firestore;
-  analytics: app.analytics.Analytics;
+  analytics?: app.analytics.Analytics;
 
   constructor() {
     app.initializeApp(config);
 
     this.auth = app.auth();
     this.firestore = app.firestore();
-    this.analytics = app.analytics();
+    if (process.env.NODE_ENV === 'production') {
+      this.analytics = app.analytics();
+    }
   }
 }
 
