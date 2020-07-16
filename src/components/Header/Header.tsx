@@ -30,14 +30,14 @@ type Props = WithStyles<typeof styles>;
 const Header: React.FC<Props> = ({ classes }) => {
   const location = useLocation();
   const isOnHome = location.pathname === LINKS.HOME;
-  const isOnLogin = location.pathname === LINKS.LOGIN;
+  const isOnSignIn = location.pathname === LINKS.SIGNIN;
 
   return (
     <div className={classes.header}>
       <Typography variant="h3" className={classes.headerTitle}>
         Habits
       </Typography>
-      {!isOnLogin &&
+      {!isOnSignIn &&
         (isOnHome ? (
           <Link to={LINKS.ADD_HABIT}>
             <IconButton aria-label="add">

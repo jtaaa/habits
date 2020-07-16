@@ -13,10 +13,10 @@ const App = () => {
   const location = useLocation();
   const { user } = useContext(UserContext);
 
-  if (!user && location.pathname !== LINKS.LOGIN) {
-    return <Redirect to={LINKS.LOGIN} />;
+  if (!user && location.pathname !== LINKS.SIGNIN) {
+    return <Redirect to={LINKS.SIGNIN} />;
   }
-  if (user && location.pathname === LINKS.LOGIN) {
+  if (user && location.pathname === LINKS.SIGNIN) {
     return <Redirect to={LINKS.HOME} />;
   }
 
@@ -24,20 +24,20 @@ const App = () => {
     <div>
       <Header />
       <Switch>
-        <Route path={LINKS.HOME} exact>
-          <Habits />
-        </Route>
         <Route path={LINKS.ALL} exact>
           <AllHabits />
         </Route>
         <Route path={LINKS.ADD_HABIT} exact>
           <AddHabit />
         </Route>
+        <Route path={LINKS.SIGNIN} exact>
+          <Login />
+        </Route>
         <Route path={LINKS.HABIT_TEMPLATE}>
           <Habit />
         </Route>
-        <Route path={LINKS.LOGIN} exact>
-          <Login />
+        <Route path={LINKS.HOME} exact>
+          <Habits />
         </Route>
       </Switch>
     </div>
