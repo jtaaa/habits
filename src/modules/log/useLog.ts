@@ -4,7 +4,9 @@ import { UserContext } from 'modules/user';
 import { getDateId } from 'utils/date';
 import { Log } from './types';
 
-const useLog = () => {
+const TODAY = new Date();
+
+const useLog = (date = TODAY) => {
   const { firestore } = useContext(FirebaseContext);
   const { user } = useContext(UserContext);
   if (!user) throw new Error('Cannot useLog when not signed in.');
@@ -12,13 +14,13 @@ const useLog = () => {
   const [log, setLog] = useState<Log>({});
 
   const logRef = useMemo(() => {
-    const dateId = getDateId(new Date());
+    const dateId = getDateId(date);
     const logCollection = firestore
       .collection('users')
       .doc(user.uid)
       .collection('logs');
     return logCollection.doc(dateId);
-  }, [firestore, user.uid]);
+  }, [firestore, user.uid, date]);
 
   useEffect(() => {
     const getLog = async () => {
