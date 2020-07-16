@@ -1,29 +1,30 @@
-import { DAY, CADENCE, Habit, HabitData } from './types';
+import { Day, Cadence, Habit, HabitData, TimePeriod } from './types';
 
 export const ALL_DAYS = {
-  [DAY.Monday]: true,
-  [DAY.Tuesday]: true,
-  [DAY.Wednesday]: true,
-  [DAY.Thursday]: true,
-  [DAY.Friday]: true,
-  [DAY.Saturday]: true,
-  [DAY.Sunday]: true,
+  [Day.Monday]: true,
+  [Day.Tuesday]: true,
+  [Day.Wednesday]: true,
+  [Day.Thursday]: true,
+  [Day.Friday]: true,
+  [Day.Saturday]: true,
+  [Day.Sunday]: true,
 };
 
 export const NO_DAYS = {
-  [DAY.Monday]: false,
-  [DAY.Tuesday]: false,
-  [DAY.Wednesday]: false,
-  [DAY.Thursday]: false,
-  [DAY.Friday]: false,
-  [DAY.Saturday]: false,
-  [DAY.Sunday]: false,
+  [Day.Monday]: false,
+  [Day.Tuesday]: false,
+  [Day.Wednesday]: false,
+  [Day.Thursday]: false,
+  [Day.Friday]: false,
+  [Day.Saturday]: false,
+  [Day.Sunday]: false,
 };
 
 export const EMPTY_HABIT_DATA: HabitData = {
   name: '',
-  cadence: CADENCE.daily,
+  cadence: Cadence.daily,
   days: NO_DAYS,
+  timePeriod: TimePeriod.AllDay,
 };
 
 export const EMPTY_HABIT: Habit = {

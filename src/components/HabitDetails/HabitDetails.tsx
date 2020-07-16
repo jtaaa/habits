@@ -11,7 +11,14 @@ import {
   Chip,
   Collapse,
 } from '@material-ui/core';
-import { useAddHabit, CADENCE, DAYS, DAY, HabitData } from 'modules/habits';
+import {
+  useAddHabit,
+  Cadence,
+  DAYS,
+  Day,
+  HabitData,
+  TimePeriod,
+} from 'modules/habits';
 import LINKS from 'utils/links';
 import Footer from './Footer';
 
@@ -45,11 +52,14 @@ const HabitDetails: React.FC<Props> = ({ classes, habit, setHabit }) => {
   const setName = (name: string) => {
     setHabit({ ...habit, name });
   };
-  const setCadence = (cadence: CADENCE) => {
+  const setCadence = (cadence: Cadence) => {
     setHabit({ ...habit, cadence });
   };
-  const toggleDay = (day: DAY) => {
+  const toggleDay = (day: Day) => {
     setHabit({ ...habit, days: { ...habit.days, [day]: !habit.days?.[day] } });
+  };
+  const setTimePeriod = (timePeriod: TimePeriod) => {
+    setHabit({ ...habit, timePeriod });
   };
 
   const addHabit = useAddHabit();
@@ -75,19 +85,53 @@ const HabitDetails: React.FC<Props> = ({ classes, habit, setHabit }) => {
       />
       <ButtonGroup variant="text" className={classes.habitDetailsCadence}>
         <Button
-          onClick={() => setCadence(CADENCE.daily)}
-          color={habit.cadence === CADENCE.daily ? 'primary' : 'secondary'}
+          onClick={() => setCadence(Cadence.daily)}
+          color={habit.cadence === Cadence.daily ? 'primary' : 'secondary'}
         >
           Daily
         </Button>
         <Button
-          onClick={() => setCadence(CADENCE.weekly)}
-          color={habit.cadence === CADENCE.weekly ? 'primary' : 'secondary'}
+          onClick={() => setCadence(Cadence.weekly)}
+          color={habit.cadence === Cadence.weekly ? 'primary' : 'secondary'}
         >
           Weekly
         </Button>
       </ButtonGroup>
-      <Collapse in={habit.cadence === CADENCE.weekly}>
+      <ButtonGroup variant="text" className={classes.habitDetailsCadence}>
+        <Button
+          onClick={() => setTimePeriod(TimePeriod.AllDay)}
+          color={
+            habit.timePeriod === TimePeriod.AllDay ? 'primary' : 'secondary'
+          }
+        >
+          All Day
+        </Button>
+        <Button
+          onClick={() => setTimePeriod(TimePeriod.Morning)}
+          color={
+            habit.timePeriod === TimePeriod.Morning ? 'primary' : 'secondary'
+          }
+        >
+          Morning
+        </Button>
+        <Button
+          onClick={() => setTimePeriod(TimePeriod.Afternoon)}
+          color={
+            habit.timePeriod === TimePeriod.Afternoon ? 'primary' : 'secondary'
+          }
+        >
+          Afternoon
+        </Button>
+        <Button
+          onClick={() => setTimePeriod(TimePeriod.Night)}
+          color={
+            habit.timePeriod === TimePeriod.Night ? 'primary' : 'secondary'
+          }
+        >
+          Night
+        </Button>
+      </ButtonGroup>
+      <Collapse in={habit.cadence === Cadence.weekly}>
         <div className={classes.habitDetailsWeeklyDays}>
           {DAYS.map((day) => (
             <span key={day} className={classes.habitDetailsDayChip}>

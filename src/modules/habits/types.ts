@@ -1,9 +1,9 @@
-export enum CADENCE {
+export enum Cadence {
   daily = 'daily',
   weekly = 'weekly',
 }
 
-export enum DAY {
+export enum Day {
   Monday = 'Monday',
   Tuesday = 'Tuesday',
   Wednesday = 'Wednesday',
@@ -12,21 +12,30 @@ export enum DAY {
   Saturday = 'Saturday',
   Sunday = 'Sunday',
 }
-export const DAYS: DAY[] = [
-  DAY.Monday,
-  DAY.Tuesday,
-  DAY.Wednesday,
-  DAY.Thursday,
-  DAY.Friday,
-  DAY.Saturday,
-  DAY.Sunday,
+export const DAYS: Day[] = [
+  Day.Monday,
+  Day.Tuesday,
+  Day.Wednesday,
+  Day.Thursday,
+  Day.Friday,
+  Day.Saturday,
+  Day.Sunday,
 ];
+
+export enum TimePeriod {
+  AllDay = 'All Day',
+  Morning = 'Morning',
+  Afternoon = 'Afternoon',
+  Night = 'Night',
+}
 
 export type HabitData = {
   name: string;
-  cadence: CADENCE;
-  days: Record<DAY, boolean>;
+  cadence: Cadence;
+  days: Record<Day, boolean>;
+  timePeriod: TimePeriod;
 };
+
 export type Habit = HabitData & {
   id: string;
   owner: string;
