@@ -20,7 +20,7 @@ const styles = ({ spacing }: Theme) =>
 
 type Props = WithStyles<typeof styles>;
 
-const Login: React.FC<Props> = ({ classes }) => {
+const SignIn: React.FC<Props> = ({ classes }) => {
   const { auth } = useContext(FirebaseContext);
 
   return (
@@ -35,4 +35,4 @@ const Login: React.FC<Props> = ({ classes }) => {
   );
 };
 
-export default withStyles(styles)(Login);
+export default withStyles(styles)(SignIn);

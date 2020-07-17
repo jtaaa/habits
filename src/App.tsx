@@ -5,7 +5,7 @@ import AddHabit from 'components/AddHabit';
 import Habits from 'components/Habits';
 import Habit from 'components/Habit';
 import AllHabits from 'components/AllHabits';
-import Login from 'components/Login';
+import SignIn from 'components/SignIn';
 import { UserContext } from 'modules/user';
 import LINKS from 'utils/links';
 import { YESTERDAY } from 'utils/date';
@@ -35,7 +35,7 @@ const App = () => {
           <AddHabit />
         </Route>
         <Route path={LINKS.SIGNIN} exact>
-          <Login />
+          <SignIn />
         </Route>
         <Route path={LINKS.HABIT_TEMPLATE}>
           <Habit />
