@@ -9,7 +9,7 @@ import {
   Box,
 } from '@material-ui/core';
 import { FirebaseContext } from 'modules/firebase';
-import { uiConfig } from './constants';
+import { uiConfig, OPEN_APP_HABIT } from './constants';
 
 const styles = ({ spacing }: Theme) =>
   createStyles({
@@ -21,7 +21,20 @@ const styles = ({ spacing }: Theme) =>
 type Props = WithStyles<typeof styles>;
 
 const SignIn: React.FC<Props> = ({ classes }) => {
-  const { auth } = useContext(FirebaseContext);
+  const { firestore, auth } = useContext(FirebaseContext);
+  const habitsCollection = firestore.collection('habits');
+
+  const signInSuccessWithAuthResult = (
+    authResult: firebase.auth.UserCredential,
+  ) => {
+    if (authResult.user && authResult.additionalUserInfo?.isNewUser) {
+      habitsCollection.add({
+        ...OPEN_APP_HABIT,
+        owner: authResult.user?.uid,
+      });
+    }
+    return true;
+  };
 
   return (
     <div className={classes.container}>
@@ -29,7 +42,10 @@ const SignIn: React.FC<Props> = ({ classes }) => {
         Sign in
       </Typography>
       <Box marginTop={1}>
-        <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={auth} />
+        <StyledFirebaseAuth
+          uiConfig={{ ...uiConfig, callbacks: { signInSuccessWithAuthResult } }}
+          firebaseAuth={auth}
+        />
       </Box>
     </div>
   );

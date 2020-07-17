@@ -5,6 +5,7 @@ const LINKS = {
   HABIT_TEMPLATE: '/:id',
   ALL: '/all',
   SIGNIN: '/signin',
+  SIGNOUT: '/signout',
   YESTERDAY: '/yesterday',
 };
 

@@ -37,6 +37,9 @@ const App = () => {
         <Route path={LINKS.SIGNIN} exact>
           <SignIn />
         </Route>
+        <Route path={LINKS.SIGNOUT} exact>
+          <SignIn />
+        </Route>
         <Route path={LINKS.HABIT_TEMPLATE}>
           <Habit />
         </Route>
