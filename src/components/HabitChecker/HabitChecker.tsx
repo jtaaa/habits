@@ -15,6 +15,7 @@ import clsx from 'classnames';
 import { Habit, Cadence } from 'modules/habits';
 import LINKS from 'utils/links';
 import Indicator from './Indicator';
+import { getShortDays } from './utils';
 
 const styles = ({ spacing, palette }: Theme) =>
   createStyles({
@@ -77,7 +78,9 @@ const HabitChecker: React.FC<Props> = ({ classes, habit, done, onDone }) => {
             className={classes.checkerHabitCadence}
             color="textSecondary"
           >
-            {habit.cadence === Cadence.daily ? 'Daily task' : 'Weekly task'}
+            {habit.cadence === Cadence.daily
+              ? 'Daily'
+              : `Weekly ${getShortDays(habit.days).join(', ')}`}
           </Typography>
         </div>
       </ButtonBase>
