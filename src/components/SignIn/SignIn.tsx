@@ -9,7 +9,7 @@ import {
   Box,
 } from '@material-ui/core';
 import { FirebaseContext } from 'modules/firebase';
-import { uiConfig, OPEN_APP_HABIT } from './constants';
+import { uiConfig, RECORD_HABITS_HABIT } from './constants';
 
 const styles = ({ spacing }: Theme) =>
   createStyles({
@@ -29,7 +29,7 @@ const SignIn: React.FC<Props> = ({ classes }) => {
   ) => {
     if (authResult.user && authResult.additionalUserInfo?.isNewUser) {
       habitsCollection.add({
-        ...OPEN_APP_HABIT,
+        ...RECORD_HABITS_HABIT,
         owner: authResult.user?.uid,
       });
     }

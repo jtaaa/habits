@@ -7,8 +7,8 @@ export const uiConfig = {
   signInOptions: [firebase.auth.GoogleAuthProvider.PROVIDER_ID],
 };
 
-export const OPEN_APP_HABIT: HabitData = {
-  name: 'Open Habits app',
+export const RECORD_HABITS_HABIT: HabitData = {
+  name: 'Record Habits',
   cadence: Cadence.daily,
   days: NO_DAYS,
   timePeriod: TimePeriod.AllDay,
