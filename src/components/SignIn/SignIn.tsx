@@ -26,7 +26,7 @@ const SignIn: React.FC<Props> = ({ classes }) => {
   return (
     <div className={classes.container}>
       <Typography variant="h5" align="center">
-        Login
+        Sign in
       </Typography>
       <Box marginTop={1}>
         <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={auth} />
