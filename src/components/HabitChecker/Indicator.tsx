@@ -1,5 +1,12 @@
 import React from 'react';
-import { Theme, createStyles, WithStyles, withStyles } from '@material-ui/core';
+import {
+  Theme,
+  createStyles,
+  WithStyles,
+  withStyles,
+  Typography,
+  Fade,
+} from '@material-ui/core';
 import clsx from 'classnames';
 
 const styles = ({ palette }: Theme) =>
@@ -13,15 +20,29 @@ const styles = ({ palette }: Theme) =>
     checkerDone: {
       backgroundColor: palette.success.main,
     },
+    checkerStreak: {
+      color: palette.getContrastText(palette.secondary.main),
+    },
   });
 
 type Props = WithStyles<typeof styles> & {
   done: boolean;
+  streak?: number;
 };
 
-const Indicator: React.FC<Props> = ({ classes, done }) => {
+const Indicator: React.FC<Props> = ({ classes, done, streak }) => {
   return (
-    <div className={clsx(classes.checker, { [classes.checkerDone]: done })} />
+    <div className={clsx(classes.checker, { [classes.checkerDone]: done })}>
+      <Fade in={!!streak}>
+        <Typography
+          variant="h6"
+          align="center"
+          className={classes.checkerStreak}
+        >
+          {streak}
+        </Typography>
+      </Fade>
+    </div>
   );
 };
 

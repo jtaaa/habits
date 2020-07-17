@@ -13,6 +13,7 @@ import {
 import CheckIcon from '@material-ui/icons/Check';
 import clsx from 'classnames';
 import { Habit, Cadence } from 'modules/habits';
+import { useHabitStats } from 'modules/log';
 import LINKS from 'utils/links';
 import Indicator from './Indicator';
 import { getShortDays } from './utils';
@@ -56,6 +57,7 @@ type Props = WithStyles<typeof styles> & {
 
 const HabitChecker: React.FC<Props> = ({ classes, habit, done, onDone }) => {
   const [isHovering, setIsHovering] = useState(false);
+  const stats = useHabitStats(habit.id);
 
   return (
     <Card
@@ -71,7 +73,7 @@ const HabitChecker: React.FC<Props> = ({ classes, habit, done, onDone }) => {
         component={Link}
         to={LINKS.HABIT(habit.id)}
       >
-        <Indicator done={!!done} />
+        <Indicator done={!!done} streak={stats?.streak} />
         <div className={classes.checkerHabitInfo}>
           <Typography variant="subtitle1">{habit.name}</Typography>
           <Typography

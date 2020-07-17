@@ -9,8 +9,7 @@ import {
   Card,
 } from '@material-ui/core';
 import HabitGrid from 'components/HabitGrid';
-import { useHabitLogs } from 'modules/log';
-import { getStatsFromLogs } from './utils';
+import { useHabitLogs, getStatsFromLogs } from 'modules/log';
 import NumericStat from './NumericStat';
 
 const styles = ({ spacing, breakpoints }: Theme) =>
