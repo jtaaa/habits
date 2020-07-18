@@ -1,5 +1,5 @@
-import useHabitLogs from './useHabitLogs';
 import { useMemo } from 'react';
+import useHabitLogs from './useHabitLogs';
 import { getStatsFromLogs } from './utils';
 
 const useHabitStats = (id: string) => {
