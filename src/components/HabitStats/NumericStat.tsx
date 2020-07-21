@@ -31,13 +31,9 @@ const NumericStat: React.FC<Props> = ({
 }) => {
   return (
     <div className={classes.numericStat}>
-      {loading ? (
-        <CircularProgress size="1em" />
-      ) : (
-        <Typography variant="h4" align="center">
-          {value}
-        </Typography>
-      )}
+      <Typography variant="h4" align="center">
+        {loading ? <CircularProgress /> : value}
+      </Typography>
       <Box marginTop={1}>
         <Typography variant="overline">{title}</Typography>
       </Box>
