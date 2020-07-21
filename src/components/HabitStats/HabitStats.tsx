@@ -6,7 +6,6 @@ import {
   withStyles,
   Typography,
   Box,
-  Card,
 } from '@material-ui/core';
 import HabitGrid from 'components/HabitGrid';
 import { useHabitLogs, getStatsFromLogs } from 'modules/log';
@@ -15,7 +14,6 @@ import NumericStat from './NumericStat';
 const styles = ({ spacing, breakpoints }: Theme) =>
   createStyles({
     habitStats: {
-      padding: spacing(3),
       margin: spacing(3),
     },
     numericStatsGrid: {
@@ -44,7 +42,7 @@ const HabitStats: React.FC<Props> = ({ classes, id }) => {
   const stats = getStatsFromLogs(habitLogs);
 
   return (
-    <Card elevation={3} className={classes.habitStats}>
+    <div className={classes.habitStats}>
       <Typography variant="h4">Stats</Typography>
       <div className={classes.numericStatsGrid}>
         <NumericStat
@@ -66,7 +64,7 @@ const HabitStats: React.FC<Props> = ({ classes, id }) => {
       <Box marginTop={3}>
         <HabitGrid habitLogs={habitLogs} />
       </Box>
-    </Card>
+    </div>
   );
 };
 

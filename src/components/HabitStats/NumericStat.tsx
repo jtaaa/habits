@@ -5,6 +5,7 @@ import {
   withStyles,
   Typography,
   CircularProgress,
+  Box,
 } from '@material-ui/core';
 
 const styles = () =>
@@ -30,14 +31,16 @@ const NumericStat: React.FC<Props> = ({
 }) => {
   return (
     <div className={classes.numericStat}>
-      <Typography variant="overline">{title}</Typography>
       {loading ? (
         <CircularProgress size="1em" />
       ) : (
-        <Typography variant="body1" align="center">
+        <Typography variant="h4" align="center">
           {value}
         </Typography>
       )}
+      <Box marginTop={1}>
+        <Typography variant="overline">{title}</Typography>
+      </Box>
     </div>
   );
 };
