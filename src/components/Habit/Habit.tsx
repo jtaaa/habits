@@ -1,6 +1,6 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
-import { LinearProgress } from '@material-ui/core';
+import { LinearProgress, Box } from '@material-ui/core';
 import HabitDetails from 'components/HabitDetails';
 import HabitStats from 'components/HabitStats';
 import { useHabit, HabitData } from 'modules/habits';
@@ -22,10 +22,10 @@ const Habit: React.FC = () => {
   }
 
   return (
-    <div>
+    <Box paddingBottom={6}>
       <HabitDetails habit={habit} setHabit={setHabitData} />
       <HabitStats id={habit.id} />
-    </div>
+    </Box>
   );
 };
 
