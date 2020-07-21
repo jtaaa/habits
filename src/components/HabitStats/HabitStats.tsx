@@ -8,6 +8,7 @@ import {
   Box,
 } from '@material-ui/core';
 import HabitGrid from 'components/HabitGrid';
+import HabitTimeline from 'components/HabitTimeline';
 import { useHabitLogs, getStatsFromLogs } from 'modules/log';
 import NumericStat from './NumericStat';
 
@@ -61,6 +62,9 @@ const HabitStats: React.FC<Props> = ({ classes, id }) => {
           loading={loading}
         />
       </div>
+      <Box marginTop={3}>
+        <HabitTimeline habitLogs={habitLogs} />
+      </Box>
       <Box marginTop={3}>
         <HabitGrid habitLogs={habitLogs} />
       </Box>
