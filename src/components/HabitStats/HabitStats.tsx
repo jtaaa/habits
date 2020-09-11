@@ -63,7 +63,7 @@ const HabitStats: React.FC<Props> = ({ classes, id }) => {
         />
       </div>
       <Box marginTop={3}>
-        <HabitTimeline habitLogs={habitLogs} />
+        <HabitTimeline habitLogs={habitLogs} loading={loading} />
       </Box>
       <Box marginTop={3}>
         <HabitGrid habitLogs={habitLogs} />

@@ -25,6 +25,7 @@ const styles = ({ spacing, palette }: Theme) =>
       padding: `${spacing(3)}px ${spacing(4)}px`,
       backgroundColor: palette.secondary.main,
       color: palette.getContrastText(palette.secondary.main),
+      transition: 'background-color 400ms ease-in, color 200ms ease-out 200ms',
     },
     habitBlockTimelineDone: {
       backgroundColor: palette.success.main,
@@ -32,9 +33,12 @@ const styles = ({ spacing, palette }: Theme) =>
     },
   });
 
-type Props = WithStyles<typeof styles> & { habitLogs: Record<string, boolean> };
+type Props = WithStyles<typeof styles> & {
+  habitLogs: Record<string, boolean>;
+  loading: boolean;
+};
 
-const HabitTimeline: React.FC<Props> = ({ classes, habitLogs }) => {
+const HabitTimeline: React.FC<Props> = ({ classes, habitLogs, loading }) => {
   return (
     <div className={classes.habitTimeline}>
       {range(0, TIMELINE_SIZE).map((offset) => {
@@ -45,7 +49,7 @@ const HabitTimeline: React.FC<Props> = ({ classes, habitLogs }) => {
           <div
             key={offset}
             className={clsx(classes.habitBlockTimeline, {
-              [classes.habitBlockTimelineDone]: isDone,
+              [classes.habitBlockTimelineDone]: loading || isDone,
             })}
           >
             <Typography align="center">{format(date, 'EEE')}</Typography>
